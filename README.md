@@ -11,7 +11,11 @@
 
 ## 3. 程式說明
 
-程式碼已整理在Colab：[![Open In Colab](https://colab.research.google.com/github/SuYenTing/-esun_2021_winter_ai_competition/blob/main/%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD2021%E5%86%AC%E5%AD%A3%E8%B3%BD%E7%A8%8B%E5%BC%8F%E7%A2%BC.ipynb)
+程式碼已整理在Colab：
+
+<a href="https://colab.research.google.com/github/SuYenTing/-esun_2021_winter_ai_competition/blob/main/%E7%8E%89%E5%B1%B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E6%85%A7%E5%85%AC%E9%96%8B%E6%8C%91%E6%88%B0%E8%B3%BD2021%E5%86%AC%E5%AD%A3%E8%B3%BD%E7%A8%8B%E5%BC%8F%E7%A2%BC.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
 此程式碼是在Colab Pro環境下執行，由於本次競賽的資料集非常大(約3,000多萬筆資料)，若只單純用Colab跑會遇到記憶體不足的問題。我已有先減少特徵及訓練樣本數方便整理資料及模型訓練能夠順利，實際上在競賽時有用到更多特徵及訓練樣本，但模型訓練與預測的流程框架並沒有改變，相關的差異有註解在程式碼內提供參考。最後是在Azure上開一台虛擬主機，規格為一顆K80 GPU和56G記憶體才能順利訓練完整資料。
 
@@ -45,11 +49,11 @@
 
 由上可以發現在分子的部分定義是不一樣的，所以為能夠讓XGBoost的ndcg能夠符合競賽目標，所以此處我們會對預測目標做調整：
 
-![V_{i,c} = 2^{rel_{i}}-1](https://latex.codecogs.com/svg.latex?\Large&space;V_{i,c} = 2^{rel_{i}}-1) 
+![V_{i,c}=2^{rel_{i}}-1](https://latex.codecogs.com/svg.latex?\Large&space;V_{i,c}=2^{rel_{i}}-1) 
 
 移項處理:
 
-![rel_{i} = log_{2}(V_{i,c}+1)](https://latex.codecogs.com/svg.latex?\Large&space;rel_{i} = log_{2}(V_{i,c}+1)) 
+![rel_{i}=log_{2}(V_{i,c}+1)](https://latex.codecogs.com/svg.latex?\Large&space;rel_{i}=log_{2}(V_{i,c}+1)) 
 
 透過對上式調整，即可讓競賽與XGBoost模型評分指標能夠一致，準確度也可以再往上提升。
 
