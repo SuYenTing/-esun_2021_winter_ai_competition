@@ -33,6 +33,8 @@
 
 此次競賽主要是以NDCG@3作為評分指標，我們由官網提供的DCG定義來看：
 
+![DCG_{c}=\sum_{i=1}^{i=3}\frac{V_{i,c}}{log_{2}(1+i)}](https://latex.codecogs.com/svg.latex?\Large&space;x=DCG_{c}=\sum_{i=1}^{i=3}\frac{V_{i,c}}{log_{2}(1+i)}) 
+
 $DCG_{c}=\sum_{i=1}^{i=3}\frac{V_{i,c}}{log_{2}(1+i)}$
 
 分子的$V_{i,c}$為客戶在該類別消費的金額。
