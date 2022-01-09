@@ -33,25 +33,23 @@
 
 此次競賽主要是以NDCG@3作為評分指標，我們由官網提供的DCG定義來看：
 
-![DCG_{c}=\sum_{i=1}^{i=3}\frac{V_{i,c}}{log_{2}(1+i)}](https://latex.codecogs.com/svg.latex?\Large&space;x=DCG_{c}=\sum_{i=1}^{i=3}\frac{V_{i,c}}{log_{2}(1+i)}) 
+![DCG_{c}=\sum_{i=1}^{i=3}\frac{V_{i,c}}{log_{2}(1+i)}](https://latex.codecogs.com/svg.latex?\Large&space;DCG_{c}=\sum_{i=1}^{i=3}\frac{V_{i,c}}{log_{2}(1+i)}) 
 
-$DCG_{c}=\sum_{i=1}^{i=3}\frac{V_{i,c}}{log_{2}(1+i)}$
-
-分子的$V_{i,c}$為客戶在該類別消費的金額。
+分子的![V_{i,c}](https://latex.codecogs.com/svg.latex?\Large&space;V_{i,c})為客戶在該類別消費的金額。
 
 這邊要注意的是XGBoost的DCG定義為：
 
-$DCG_{c}=\sum_{i=1}^{i=3}\frac{2^{rel_{i}}-1}{log_{2}(1+i)}$
+![DCG_{c}=\sum_{i=1}^{i=3}\frac{2^{rel_{i}}-1}{log_{2}(1+i)}](https://latex.codecogs.com/svg.latex?\Large&space;DCG_{c}=\sum_{i=1}^{i=3}\frac{2^{rel_{i}}-1}{log_{2}(1+i)}) 
 
-其中$rel_{i}$為XGBoost Learing to Rank的預測目標。
+其中![rel_{i}](https://latex.codecogs.com/svg.latex?\Large&space;rel_{i})為XGBoost Learing to Rank的預測目標。
 
 由上可以發現在分子的部分定義是不一樣的，所以為能夠讓XGBoost的ndcg能夠符合競賽目標，所以此處我們會對預測目標做調整：
 
-$V_{i,c} = 2^{rel_{i}}-1$
+![V_{i,c} = 2^{rel_{i}}-1](https://latex.codecogs.com/svg.latex?\Large&space;V_{i,c} = 2^{rel_{i}}-1) 
 
 移項處理:
 
-$rel_{i} = log_{2}(V_{i,c}+1)$
+![rel_{i} = log_{2}(V_{i,c}+1)](https://latex.codecogs.com/svg.latex?\Large&space;rel_{i} = log_{2}(V_{i,c}+1)) 
 
 透過對上式調整，即可讓競賽與XGBoost模型評分指標能夠一致，準確度也可以再往上提升。
 
